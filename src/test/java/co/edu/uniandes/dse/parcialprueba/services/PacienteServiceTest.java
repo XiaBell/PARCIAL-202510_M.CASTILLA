@@ -73,12 +73,15 @@ public class PacienteServiceTest {
 	}
 
     @Test
-    public void crearPacienteTest() throws IllegalOperationException {
+    void crearPacienteTest() throws IllegalOperationException {
         
         PacienteEntity newpaciente = factory.manufacturePojo(PacienteEntity.class);
-		newpaciente.setHistoria(historiaService);
-		pacienteService.crearPaciente(newpaciente);
-
+        List<HistoriaClinicaEntity>historias = new ArrayList<HistoriaClinicaEntity>();
+        historias.add(factory.manufacturePojo(HistoriaClinicaEntity.class));
+        newpaciente.setHistorias(historias);
+        PacienteEntity result = pacienteService.crearPaciente(newpaciente);
+        assertNotNull(result);
+        assertEquals(newpaciente.getNombre(), result.getNombre());
     }
 
     public void AsociarPacienteAcudienteTest() throws IllegalOperationException {

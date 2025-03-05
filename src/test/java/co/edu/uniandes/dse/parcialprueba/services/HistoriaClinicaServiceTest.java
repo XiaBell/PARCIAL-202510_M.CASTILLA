@@ -74,16 +74,23 @@ public class HistoriaClinicaServiceTest {
     }
 
     @Test
-    void testCrearHistoriaCorrectamente() throws EntityNotFoundException, IllegalOperationException  {
+    void testCrearHistoriaCorrectamente() throws IllegalOperationException  {
         
         HistoriaClinicaEntity historia = factory.manufacturePojo(HistoriaClinicaEntity.class);
         PacienteEntity paciente = factory.manufacturePojo(PacienteEntity.class);
         historia.setPaciente(paciente);
 
         historiaService.crearHistoria(paciente.getId(), historia);
-    
+        
+        assertNotNull(historia.getId());
+        assertEquals(paciente.getId(), historia.getPaciente().getId());
     }
 
     @Test
-    void crearHistoriaNum()
+    void crearHistoriaNum(){
+        HistoriaClinicaEntity historia = factory.manufacturePojo(HistoriaClinicaEntity.class);
+        PacienteEntity paciente = factory.manufacturePojo(PacienteEntity.class);
+        historia.setPaciente(paciente);
+
+    }
 }
